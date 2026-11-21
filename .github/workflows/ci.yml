@@ -23,7 +23,16 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run typecheck
-      - name: Unit tests (report parser, path guard)
+      - name: Lint (ESLint + eslint-plugin-playwright)
+        run: npm run lint
+      - name: Formatting (Prettier)
+        run: npm run format:check
+      - name: Unit tests (report parser, trace and listing helpers, path guard)
         run: npm test
-      - name: Smoke test over stdio (rerun_by_id TC-1)
+      - name: Job summary
+        if: ${{ !cancelled() }}
+        run: node dist/summary.js test-results/results.json --title "Unit tests"
+      - name: Smoke test over stdio (list, run, explain, rerun by ID)
         run: npm run smoke
+      - name: Package contents
+        run: npm pack --dry-run
