@@ -1,0 +1,32 @@
+{
+  "name": "playwright-rerun-mcp",
+  "version": "1.0.0",
+  "description": "MCP server that lets an AI assistant list failed or flaky Playwright tests and rerun only those, or rerun by test-case ID.",
+  "license": "MIT",
+  "author": "Ibtsam Ayyaz",
+  "repository": { "type": "git", "url": "git+https://github.com/ibtsam2666/playwright-rerun-mcp.git" },
+  "keywords": ["mcp", "model-context-protocol", "playwright", "testing", "claude", "flaky-tests"],
+  "bin": { "playwright-rerun-mcp": "dist/cli.js" },
+  "main": "dist/tools.js",
+  "files": ["dist", "README.md", "LICENSE"],
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "prepare": "npm run build",
+    "test": "playwright test --project=unit",
+    "smoke": "npm run build && node dist/smoke.js",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "1.32.1",
+    "zod": "3.25.76"
+  },
+  "peerDependencies": {
+    "@playwright/test": ">=1.45"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.65.0",
+    "@types/node": "22.10.2",
+    "typescript": "5.7.2"
+  }
+}
