@@ -2,9 +2,10 @@ import { defineConfig } from '@playwright/test';
 
 export default defineConfig({
   reporter: [['list'], ['json', { outputFile: 'test-results/results.json' }]],
+  use: { trace: 'retain-on-failure' },
   projects: [
     { name: 'unit', testDir: './tests' },
-    // A tiny example suite the smoke test reruns by case ID.
+    // A tiny example suite the smoke test lists, breaks, explains and reruns by case ID.
     { name: 'example', testDir: './examples' },
   ],
 });
